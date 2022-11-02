@@ -1,8 +1,10 @@
 package br.com.erudio.services
 
 import br.com.erudio.data.vo.v1.PersonVO
+import br.com.erudio.data.vo.v2.PersonVO as PersonVOV2
 import br.com.erudio.exceptions.ResourceNotFoundException
 import br.com.erudio.mapper.DozerMapper
+import br.com.erudio.mapper.custom.PersonMapper
 import br.com.erudio.model.Person
 import br.com.erudio.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +17,9 @@ class PersonService {
 
     @Autowired
     private lateinit var repository: PersonRepository
+
+    @Autowired
+    private lateinit var mapper: PersonMapper
 
     private val logger = Logger.getLogger(PersonService::class.java.name)
 
@@ -33,7 +38,7 @@ class PersonService {
     fun create(person: PersonVO): PersonVO {//passamos o VO que chega para entity, vai até o BD,salva, devolve entity
                                             //e parse da entity para VO
         logger.info("Create one person name ${person.firstName}!")
-        var entity : Person = DozerMapper.parseObject(person,Person::class.java )
+        val entity : Person = DozerMapper.parseObject(person,Person::class.java )
         return DozerMapper.parseObject(repository.save(entity),PersonVO::class.java)
 
     }
@@ -52,7 +57,13 @@ class PersonService {
     fun delete(id: Long) {
         logger.info("Delete a person Id $id!")
         val entity = repository.findById(id)
-            .orElseThrow { ResourceNotFoundException("No records found for this ID") }
+            .orElseThrow { ResourceNotFoundException("No records found for delete this ID") }
         repository.delete(entity)
+    }
+
+    fun createV2(person: PersonVOV2): PersonVOV2 {
+        logger.info("Create one person name ${person.firstName}!")
+        val entity : Person = mapper.mapVOtoEntity(person)
+        return mapper.mapEntityToVO(repository.save(entity))
     }
 }
