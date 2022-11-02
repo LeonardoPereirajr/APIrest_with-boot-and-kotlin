@@ -1,5 +1,6 @@
 package br.com.erudio.mockito.services
 
+import br.com.erudio.exceptions.RequiredObjectsIsNullException
 import br.com.erudio.repository.PersonRepository
 import br.com.erudio.services.PersonService
 import br.com.erudio.unittests.mapper.mocks.MockPerson
@@ -33,6 +34,35 @@ internal class PersonServiceTest {
 
     @Test
     fun findAll() {
+        val list = inputObject.mockEntityList()
+        `when`(repository.findAll()).thenReturn(list)
+
+        val persons = service.findAll()
+
+        assertNotNull(persons)
+        assertEquals(14, persons.size)
+
+        val personOne = persons[1]
+        assertNotNull(personOne)
+        assertNotNull(personOne.key)
+        assertNotNull(personOne.links)
+        println(personOne.links)
+        assertTrue(personOne.links.toString().contains("</person/v1/1>;rel=\"self\""))
+        assertEquals("Address Test1", personOne.address)
+        assertEquals("First Name Test1", personOne.firstName)
+        assertEquals("Last Name Test1", personOne.lastName)
+        assertEquals("Female", personOne.gender)
+
+        val personFour = persons[4]
+        assertNotNull(personFour)
+        assertNotNull(personFour.key)
+        assertNotNull(personFour.links)
+        println(personFour.links)
+        assertTrue(personFour.links.toString().contains("</person/v1/4>;rel=\"self\""))
+        assertEquals("Address Test4", personFour.address)
+        assertEquals("First Name Test4", personFour.firstName)
+        assertEquals("Last Name Test4", personFour.lastName)
+        assertEquals("Male", personFour.gender)
     }
 
     @Test
@@ -77,6 +107,16 @@ internal class PersonServiceTest {
         assertEquals("Female", result.gender)
 
     }
+    @Test
+    fun createWithNullPerson() {
+        val exception: Exception = assertThrows(
+            RequiredObjectsIsNullException::class.java
+        ){service.create(null)}
+
+        val expectedMessage ="It is not allowed to persist a null Object"
+        val actualMessage = exception.message
+        assertTrue(actualMessage!!.contains(expectedMessage))
+    }
 
     @Test
     fun update() {
@@ -100,6 +140,16 @@ internal class PersonServiceTest {
         assertEquals("First Name Test1", result.firstName)
         assertEquals("Last Name Test1", result.lastName)
         assertEquals("Female", result.gender)
+    }
+    @Test
+    fun updateWithNullPerson() {
+        val exception: Exception = assertThrows(
+            RequiredObjectsIsNullException::class.java
+        ){service.update(null)}
+
+        val expectedMessage ="It is not allowed to persist a null Object"
+        val actualMessage = exception.message
+        assertTrue(actualMessage!!.contains(expectedMessage))
     }
 
     @Test
