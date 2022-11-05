@@ -14,7 +14,7 @@
 | :fire: Desafio     | https://url-do-desafio.com.br
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
- ![image](https://user-images.githubusercontent.com/30580018/200127886-ad96e293-45de-4efe-9cb2-51e2f629b3a9.png) #vitrinedev
+![image](https://user-images.githubusercontent.com/30580018/200132319-2dfb32ea-c112-4609-91eb-58ea7735e010.png) #vitrinedev
 
 ## Detalhes do projeto
 
