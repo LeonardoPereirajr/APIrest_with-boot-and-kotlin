@@ -1,4 +1,4 @@
-package br.com.erudio.mockito.services
+package br.com.erudio.unittest.mockito.services
 
 import br.com.erudio.exceptions.RequiredObjectsIsNullException
 import br.com.erudio.repository.PersonRepository
@@ -47,7 +47,7 @@ internal class PersonServiceTest {
         assertNotNull(personOne.key)
         assertNotNull(personOne.links)
         println(personOne.links)
-        assertTrue(personOne.links.toString().contains("</person/v1/1>;rel=\"self\""))
+        assertTrue(personOne.links.toString().contains("</api/person/v1/1>;rel=\"self\""))
         assertEquals("Address Test1", personOne.address)
         assertEquals("First Name Test1", personOne.firstName)
         assertEquals("Last Name Test1", personOne.lastName)
@@ -58,7 +58,7 @@ internal class PersonServiceTest {
         assertNotNull(personFour.key)
         assertNotNull(personFour.links)
         println(personFour.links)
-        assertTrue(personFour.links.toString().contains("</person/v1/4>;rel=\"self\""))
+        assertTrue(personFour.links.toString().contains("</api/person/v1/4>;rel=\"self\""))
         assertEquals("Address Test4", personFour.address)
         assertEquals("First Name Test4", personFour.firstName)
         assertEquals("Last Name Test4", personFour.lastName)
@@ -77,7 +77,7 @@ internal class PersonServiceTest {
         assertNotNull(result.key)
         assertNotNull(result.links)
         println(result.links)
-        assertTrue(result.links.toString().contains("</person/v1/1>;rel=\"self\""))
+        assertTrue(result.links.toString().contains("</api/person/v1/1>;rel=\"self\""))
         assertEquals("Address Test1", result.address)
         assertEquals("First Name Test1", result.firstName)
         assertEquals("Last Name Test1", result.lastName)
@@ -100,7 +100,7 @@ internal class PersonServiceTest {
         assertNotNull(result.key)
         assertNotNull(result.links)
         println(result.links)
-        assertTrue(result.links.toString().contains("</person/v1/1>;rel=\"self\""))
+        assertTrue(result.links.toString().contains("</api/person/v1/1>;rel=\"self\""))
         assertEquals("Address Test1", result.address)
         assertEquals("First Name Test1", result.firstName)
         assertEquals("Last Name Test1", result.lastName)
@@ -135,7 +135,7 @@ internal class PersonServiceTest {
         assertNotNull(result.key)
         assertNotNull(result.links)
         println(result.links)
-        assertTrue(result.links.toString().contains("</person/v1/1>;rel=\"self\""))
+        assertTrue(result.links.toString().contains("</api/person/v1/1>;rel=\"self\""))
         assertEquals("Address Test1", result.address)
         assertEquals("First Name Test1", result.firstName)
         assertEquals("Last Name Test1", result.lastName)
