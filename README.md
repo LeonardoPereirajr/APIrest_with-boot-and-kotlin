@@ -7,8 +7,8 @@
 
 | :placard: Vitrine.Dev |     |
 | -------------  | --- |
-| :sparkles: Nome        | **Titulo do meu projeto**
-| :label: Tecnologias | java, html, ruby, c# (tecnologias utilizadas)
+| :sparkles: Nome        | **Mercado de Livros API**
+| :label: Tecnologias | java, kotlin (tecnologias utilizadas)
 | :rocket: URL         | https://url-deploy.com.br
 | :fire: Desafio     | https://url-do-desafio.com.br
 
