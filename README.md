@@ -1,8 +1,10 @@
 # Projeto em Kotlin - Venda de livros com RESTfull API
 
- - Utilização de Swagger
-  - Docker
-   - Hospedagem na AWS
+ - Utilização de Swagger2
+ - Testes Unitários com Mockito
+ - Docker
+ - Hospedagem na AWS
+   
 
 | :placard: Vitrine.Dev |     |
 | -------------  | --- |
