@@ -23,7 +23,7 @@ open class AbstractIntegrationTest {
         }
 
         companion object{
-            private var mysql: MySQLContainer<*> = MySQLContainer("mysql:8.0.29")
+            private var mysql: MySQLContainer<*> = MySQLContainer("mysql:8.0.28")
 
             private fun startContainers() {
                 Startables.deepStart(Stream.of(mysql)).join()
