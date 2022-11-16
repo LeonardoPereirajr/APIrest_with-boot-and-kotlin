@@ -2,7 +2,7 @@ package br.com.erudio.services
 
 import br.com.erudio.controller.BookController
 import br.com.erudio.data.vo.v1.BookVO
-import br.com.erudio.exceptions.RequiredObjectsIsNullException
+import br.com.erudio.exceptions.RequiredObjectIsNullException
 import br.com.erudio.exceptions.ResourceNotFoundException
 import br.com.erudio.mapper.DozerMapper
 import br.com.erudio.model.Book
@@ -42,7 +42,7 @@ class BookService {
     }
 
     fun create(book: BookVO?) : BookVO{
-        if (book == null) throw RequiredObjectsIsNullException()
+        if (book == null) throw RequiredObjectIsNullException()
         logger.info("Creating one book with title ${book.title}!")
         var entity: Book = DozerMapper.parseObject(book, Book::class.java)
         val bookVO: BookVO = DozerMapper.parseObject(repository.save(entity), BookVO::class.java)
@@ -52,7 +52,7 @@ class BookService {
     }
 
     fun update(book: BookVO?) : BookVO{
-        if (book == null) throw RequiredObjectsIsNullException()
+        if (book == null) throw RequiredObjectIsNullException()
         logger.info("Updating one book with ID ${book.key}!")
         val entity = repository.findById(book.key)
             .orElseThrow { ResourceNotFoundException("No records found for this ID!") }

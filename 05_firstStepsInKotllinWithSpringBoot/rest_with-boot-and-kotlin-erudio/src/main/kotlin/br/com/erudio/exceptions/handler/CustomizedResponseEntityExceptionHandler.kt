@@ -1,7 +1,8 @@
 package br.com.erudio.exceptions.handler
 
 import br.com.erudio.exceptions.ExceptionResponse
-import br.com.erudio.exceptions.RequiredObjectsIsNullException
+import br.com.erudio.exceptions.InvalidJwtAuthenticationException
+import br.com.erudio.exceptions.RequiredObjectIsNullException
 import br.com.erudio.exceptions.ResourceNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,34 +15,49 @@ import java.util.*
 
 @ControllerAdvice
 @RestController
-class CustomizedResponseEntityExceptionHandler: ResponseEntityExceptionHandler() {
+class CustomizedResponseEntityExceptionHandler : ResponseEntityExceptionHandler(){
+
     @ExceptionHandler(Exception::class)
-    fun handlerAllExceptions(ex: Exception,request: WebRequest): ResponseEntity<ExceptionResponse> {
-        val exceptionResponse = ExceptionResponse(
+    fun handleAllExceptions(ex: Exception, request: WebRequest) :
+            ResponseEntity<ExceptionResponse> {
+        val exceptioResponse = ExceptionResponse(
             Date(),
             ex.message,
             request.getDescription(false)
         )
-        return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
     @ExceptionHandler(ResourceNotFoundException::class)
-    fun handlerResourceNotFoundException(ex: Exception,request: WebRequest): ResponseEntity<ExceptionResponse> {
-        val exceptionResponse = ExceptionResponse(
+    fun handleResourceNotFoundExceptions(ex: Exception, request: WebRequest) :
+            ResponseEntity<ExceptionResponse> {
+        val exceptioResponse = ExceptionResponse(
             Date(),
             ex.message,
             request.getDescription(false)
         )
-        return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NOT_FOUND)
+        return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.NOT_FOUND)
     }
 
-    @ExceptionHandler(RequiredObjectsIsNullException::class)
-    fun handlerBadRequestException(ex: Exception,request: WebRequest): ResponseEntity<ExceptionResponse> {
-        val exceptionResponse = ExceptionResponse(
+    @ExceptionHandler(RequiredObjectIsNullException::class)
+    fun handleBadRequestExceptions(ex: Exception, request: WebRequest) :
+            ResponseEntity<ExceptionResponse> {
+        val exceptioResponse = ExceptionResponse(
             Date(),
             ex.message,
             request.getDescription(false)
         )
-        return ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.BAD_REQUEST)
+        return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException::class)
+    fun handleInvalidJwtAuthenticationExceptions(ex: Exception, request: WebRequest) :
+            ResponseEntity<ExceptionResponse> {
+        val exceptioResponse = ExceptionResponse(
+            Date(),
+            ex.message,
+            request.getDescription(false)
+        )
+        return ResponseEntity<ExceptionResponse>(exceptioResponse, HttpStatus.FORBIDDEN)
     }
 }

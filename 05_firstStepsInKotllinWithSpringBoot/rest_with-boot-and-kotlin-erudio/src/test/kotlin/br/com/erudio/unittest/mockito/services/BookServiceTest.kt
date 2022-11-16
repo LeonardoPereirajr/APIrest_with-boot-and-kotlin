@@ -1,6 +1,6 @@
 package br.com.erudio.unittest.mockito.services
 
-import br.com.erudio.exceptions.RequiredObjectsIsNullException
+import br.com.erudio.exceptions.RequiredObjectIsNullException
 import br.com.erudio.repository.BookRepository
 import br.com.erudio.services.BookService
 import br.com.erudio.unittests.mocks.MockBook
@@ -107,7 +107,7 @@ internal class BookServiceTest {
     @Test
     fun createWithNullBook() {
         val exception: Exception = assertThrows(
-            RequiredObjectsIsNullException::class.java
+            RequiredObjectIsNullException::class.java
         ){service.create(null)}
 
         val expectedMessage ="It is not allowed to persist a null Object"
@@ -140,7 +140,7 @@ internal class BookServiceTest {
     @Test
     fun updateWithNullBook() {
         val exception: Exception = assertThrows(
-            RequiredObjectsIsNullException::class.java
+            RequiredObjectIsNullException::class.java
         ){service.update(null)}
 
         val expectedMessage ="It is not allowed to persist a null Object"

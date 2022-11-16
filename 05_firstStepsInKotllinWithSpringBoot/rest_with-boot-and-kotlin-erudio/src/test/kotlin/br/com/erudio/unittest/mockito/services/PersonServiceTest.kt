@@ -1,6 +1,6 @@
 package br.com.erudio.unittest.mockito.services
 
-import br.com.erudio.exceptions.RequiredObjectsIsNullException
+import br.com.erudio.exceptions.RequiredObjectIsNullException
 import br.com.erudio.repository.PersonRepository
 import br.com.erudio.services.PersonService
 import br.com.erudio.unittests.mapper.mocks.MockPerson
@@ -110,7 +110,7 @@ internal class PersonServiceTest {
     @Test
     fun createWithNullPerson() {
         val exception: Exception = assertThrows(
-            RequiredObjectsIsNullException::class.java
+            RequiredObjectIsNullException::class.java
         ){service.create(null)}
 
         val expectedMessage ="It is not allowed to persist a null Object"
@@ -144,7 +144,7 @@ internal class PersonServiceTest {
     @Test
     fun updateWithNullPerson() {
         val exception: Exception = assertThrows(
-            RequiredObjectsIsNullException::class.java
+            RequiredObjectIsNullException::class.java
         ){service.update(null)}
 
         val expectedMessage ="It is not allowed to persist a null Object"
